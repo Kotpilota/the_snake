@@ -34,7 +34,6 @@ class GameObject:
 
     def __init__(self, position=None, body_color=None):
         """Инициализирует объект."""
-
         self.position = position
         self.body_color = body_color
 
