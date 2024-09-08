@@ -30,6 +30,7 @@ clock = pygame.time.Clock()
 
 class GameObject:
     """Базовый класс для всех игровых объектов."""
+
     def __init__(self, position=None, color=None):
         """Инициализирует объект."""
         if position is None:
@@ -44,6 +45,7 @@ class GameObject:
 
 class Apple(GameObject):
     """Класс для яблока."""
+
     def __init__(self):
         """Инициализирует яблоко и устанавливает его позицию."""
         self.color = APPLE_COLOR
@@ -64,6 +66,7 @@ class Apple(GameObject):
 
 class Snake(GameObject):
     """Класс для змейки."""
+
     def __init__(self):
         """Инициализирует змейку с начальным данными."""
         super().__init__(
@@ -137,11 +140,14 @@ def handle_keys(snake):
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP and snake.direction != DIRECTION_DOWN:
                 snake.next_direction = DIRECTION_UP
-            elif event.key == pygame.K_DOWN and snake.direction != DIRECTION_UP:
+            elif (event.key == pygame.K_DOWN
+                  and snake.direction != DIRECTION_UP):
                 snake.next_direction = DIRECTION_DOWN
-            elif event.key == pygame.K_LEFT and snake.direction != DIRECTION_RIGHT:
+            elif (event.key == pygame.K_LEFT
+                  and snake.direction != DIRECTION_RIGHT):
                 snake.next_direction = DIRECTION_LEFT
-            elif event.key == pygame.K_RIGHT and snake.direction != DIRECTION_LEFT:
+            elif (event.key == pygame.K_RIGHT
+                  and snake.direction != DIRECTION_LEFT):
                 snake.next_direction = DIRECTION_RIGHT
 
 
