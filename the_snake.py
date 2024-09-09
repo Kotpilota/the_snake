@@ -62,7 +62,7 @@ class GameObject:
         body_color (tuple): The RGB color of the object.
 
     Methods:
-        draw(): Method to be overridden by subclasses to draw the object on the screen.
+        draw(): Method to be overridden by subclasses to draw the object.
     """
 
     def __init__(self, position=None, body_color=None):
@@ -70,14 +70,17 @@ class GameObject:
         Initializes the game object with a position and a color.
 
         Args:
-            position (tuple): The initial position of the object (default is None).
-            body_color (tuple): The color of the object (default is None).
+            position (tuple): The initial position of the object.
+            body_color (tuple): The color of the object.
         """
         self.position = position
         self.body_color = body_color
 
     def draw(self):
-        """Draws the game object on the screen. To be implemented by child classes."""
+        """
+        Draws the game object on the screen.
+        To be implemented by child classes.
+        """
         pass
 
 
@@ -85,11 +88,14 @@ class Apple(GameObject):
     """
     Represents the apple in the game.
 
-    The apple is a game object that can appear at a random position on the screen.
-    The player must collect apples to grow the snake.
+    The apple is a game object that can appear
+    at a random position on the screen.
+    The player must collect apples to
+    grow the snake.
 
     Methods:
-        randomize_position(): Randomly sets the position of the apple on the screen.
+        randomize_position(): Randomly sets the
+        position of the apple on the screen.
         draw(): Draws the apple on the screen.
     """
 
@@ -127,7 +133,7 @@ class Snake(GameObject):
     """
 
     def __init__(self):
-        """Initializes the snake with a starting position, direction, and length."""
+        """Initializes the snake with a starting information"""
         super().__init__(
             position=SCREEN_CENTER,
             body_color=SNAKE_COLOR
@@ -191,7 +197,7 @@ class Snake(GameObject):
         return self.positions[0]
 
     def reset(self):
-        """Resets the snake to its initial state: centered, single segment, moving right."""
+        """Resets the snake to its initial state."""
         self.positions = [SCREEN_CENTER]
         self.direction = RIGHT
         self.next_direction = None
