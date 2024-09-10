@@ -43,19 +43,15 @@ clock = pygame.time.Clock()
 
 
 class GameOver(Exception):
-    """
-    Custom exception to indicate the end of the game.
+    """Custom exception to indicate the end of the game.
 
     This exception is raised when the game is over (e.g., when the player
     closes the game window). It is handled in the main game loop.
     """
 
-    print('Player has quitted the game!')
-
 
 class GameObject:
-    """
-    A base class for all game objects.
+    """A base class for all game objects.
 
     Attributes:
         position (tuple): The (x, y) position of the object on the screen.
@@ -85,8 +81,7 @@ class GameObject:
 
 
 class Apple(GameObject):
-    """
-    Represents the apple in the game.
+    """Represents the apple in the game.
 
     The apple is a game object that can appear
     at a random position on the screen.
@@ -118,8 +113,7 @@ class Apple(GameObject):
 
 
 class Snake(GameObject):
-    """
-    Represents the snake in the game.
+    """Represents the snake in the game.
 
     The snake is the main character controlled by the player. It moves in a
     specified direction and grows in length when it eats an apple.
@@ -151,8 +145,7 @@ class Snake(GameObject):
             self.next_direction = None
 
     def move(self):
-        """
-        Moves the snake in the current direction.
+        """Moves the snake in the current direction.
 
         Calculates the new head position based on the current direction.
         The snake wraps around the screen edges.
@@ -206,8 +199,7 @@ class Snake(GameObject):
 
 
 def handle_keys(snake):
-    """
-    Handles keyboard input to control the snake.
+    """Handles keyboard input to control the snake.
 
     Listens for key events to change the snake's direction or quit the game.
     If the Quit event is detected, raises the GameOver exception.
@@ -225,8 +217,7 @@ def handle_keys(snake):
 
 
 def main():
-    """
-    The main game loop.
+    """The main game loop.
 
     Initializes the game, creates the snake and apple objects,
     and runs the game loop, handling user input, updating game
@@ -235,30 +226,29 @@ def main():
     pygame.init()
     snake = Snake()
     apple = Apple()
+    while True:
 
-    try:
-        while True:
-            clock.tick(SNAKE_SPEED)
+        try:
             handle_keys(snake)
-            snake.update_direction()
-            snake.move()
+        except GameOver:
+            pygame.quit()
+        clock.tick(SNAKE_SPEED)
+        snake.update_direction()
+        snake.move()
 
-            # Check for collisions with apple or snake body
-            if snake.get_head_position() == apple.position:
-                snake.length += 1
-                apple.randomize_position()
+        # Check for collisions with apple or snake body
+        if snake.get_head_position() == apple.position:
+            snake.length += 1
+            apple.randomize_position()
 
-            if snake.get_head_position() in snake.positions[1:]:
-                snake.reset()
+        if snake.get_head_position() in snake.positions[1:]:
+            snake.reset()
 
-            # Render the game state
-            screen.fill(BOARD_BACKGROUND_COLOR)
-            apple.draw()
-            snake.draw()
-            pygame.display.update()
-
-    except GameOver:
-        pygame.quit()
+        # Render the game state
+        screen.fill(BOARD_BACKGROUND_COLOR)
+        apple.draw()
+        snake.draw()
+        pygame.display.update()
 
 
 if __name__ == '__main__':
